@@ -14,7 +14,20 @@ import os
 class AtomicContributionToModes:
 
 	def __init__(self,PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',BornFileName='BORN',supercell=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],nac=False,symprec=1e-5,masses=[],primitive=[[1, 0, 0],[0, 1, 0], [0, 0, 1]]):
-		"""Aufgabe dieser Klasse: Am Gamma-Punkt die Anteile der Atome an den Schwingungsmoden herausgeben und schoen plotten"""
+		"""Class that calculates contributions of each atom to the phonon modes at Gamma
+			Args:
+			PoscarNamse (str): name of the POSCAR that was used for the phonon calculation
+			BornFileName (str): name of the file with BORN charges (formatted with outcar-born)
+			ForceConstants (boolean): If True, ForceConstants are read in. If False, forces are read in.
+			ForceFileName (str): name of the file including force constants or forces
+			supercell (list of lists): reads in supercell
+			nac (boolean): If true, NAC is applied.
+			symprec (float): contains symprec tag as used in Phonopy
+			masses (list): Masses in this list are used instead of the ones prepared in Phonopy. Useful for isotopes.
+			primitive (list of lists): contains rotational matrix to arrive at primitive cell
+			
+		"""
+	
 		self.__unitcell =read_vasp(PoscarName)
 		self.__supercell=supercell
 		self.__phonon= Phonopy(self.__unitcell,supercell_matrix=self.__supercell,primitive_matrix=primitive,factor=VaspToCm,symprec=symprec)
@@ -113,11 +126,12 @@ class AtomicContributionToModes:
 				for alpha in range(3):
 					sum=sum+abs(self.__Eigenvector(atom,freq,alpha)*self.__Eigenvector(atom,freq,alpha))
 				self.__PercentageAtom[freq,atom]=sum
-	def __get_Contributions(self,freq,atom):
+	def __get_Contributions(self,band,atom):
 		"""
-		Mach was,  um die Frequenzen zu kriegen
+		Gives contribution of specific atom to modes with certain frequency 
+		band (int): number of the frequency (ordered by energy)
 		"""
-		return self.__PercentageAtom[freq,atom]
+		return self.__PercentageAtom[band,atom]
 		
 	def write_file(self,filename="Contributions.txt"):
 		file  = open(filename, 'w')
@@ -130,16 +144,13 @@ class AtomicContributionToModes:
 
 		file.close()
 
-	def plot(self,grouping,freqstart=[],freqend=[],freqlist=[],filename="Plot.eps"):
-		#grouping should be checked
-		#'GroupedAtoms', 'ColorsOfGroupedAtoms','Legend' have to be included	
-		#Check thtat the atoms are numbers
-		#
+	def plot(self,grouping,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
 		"""
 		freqstart min frequency of plot in cm-1
 		freqend max frequency of plot in cm-1
 		freqlist list of frequencies that will be plotted
 		"""
+		fig, ax1 = plt.subplots()		
 		p={}
 		summe={}
 		if freqlist==[]:		
@@ -163,9 +174,9 @@ class AtomicContributionToModes:
          	       			Entry[freq]= Entry[freq]+ self.__get_Contributions(freqlist[freq],atom)
 					if group==0:
 						summe[freq]=0	
-			print[Entry]
+			
 			#plot bar chart
-			p[group]=plt.barh(np.arange(len(freqlist)),Entry.values(),left=summe.values(),color=color1,height=1,label=grouping['Legend'][group] ) 
+			p[group]=ax1.barh(np.arange(len(freqlist)),Entry.values(),left=summe.values(),color=color1,height=1,label=grouping['Legend'][group] ) 
 			#needed for "left" in the bar chart plot
 			for freq in range(len(freqlist)):
 				if group==0:
@@ -174,25 +185,27 @@ class AtomicContributionToModes:
 					summe[freq]=summe[freq]+Entry[freq]			
 		labeling={}
 		for freq in range(len(freqlist)):
-			labeling[freq]=round(self.__frequencies[freq],1)
+			labeling[freq]=round(self.__frequencies[freqlist[freq]],1)
 			#details for the plot
 
 	
 
-		plt.yticks(np.arange(0.5,len(self.__frequencies)+0.5),labeling.values())
+		ax1.set_yticklabels(labeling.values())
+		ax1.set_yticks(np.arange(0.5,len(self.__frequencies)+0.5))
+		ax2 = ax1.twinx()
+		ax2.set_yticklabels(labelsforfreq)
+		ax2.set_yticks(np.arange(0.5,len(self.__frequencies)+0.5))
 		#start and end of the yrange
 		start,end=self.__get_freqbordersforplot(freqstart,freqend,freqlist)
-		plt.ylim(start,end)
-		plt.xlim(0.0, 1.0)
-		plt.xlabel('Contribution of Atoms to Modes')
-		plt.ylabel('Wavenumber (cm-1)')
+		ax1.set_ylim(start,end)
+		ax2.set_ylim(start,end)
+		ax1.set_xlim(0.0, 1.0)
+		ax1.set_xlabel('Contribution of Atoms to Modes')
+		ax1.set_ylabel('Wavenumber (cm-1)')
 		plt.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left",mode="expand", borderaxespad=0, ncol=len(grouping['GroupedAtoms']))
 		plt.savefig(filename, bbox_inches="tight")
 		plt.show()
 		
-	#def __get_
-
-
 	def __get_freqbordersforplot(self,freqstart,freqend,freqlist):
         	if freqstart==[]:
                         start=0.0
