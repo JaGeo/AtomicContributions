@@ -24,8 +24,8 @@ How to
 
 Todo
 --------
-1. Treat Degeneracy
-2. Scaling of Intensities
+1. IR and Raman active modes should be marked
+2. Mulliken Symbols should be shown
 3. Other functionalities
 4. Include tests
 
