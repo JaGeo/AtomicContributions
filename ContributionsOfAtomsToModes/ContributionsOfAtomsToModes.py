@@ -202,7 +202,7 @@ class AtomicContributionToModes:
 		ax1.set_xlim(0.0, 1.0)
 		ax1.set_xlabel('Contribution of Atoms to Modes')
 		ax1.set_ylabel('Wavenumber (cm-1)')
-		plt.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left",mode="expand", borderaxespad=0, ncol=len(grouping['GroupedAtoms']))
+		ax1.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left",mode="expand", borderaxespad=0, ncol=len(grouping['GroupedAtoms']))
 		plt.savefig(filename, bbox_inches="tight")
 		plt.show()
 		
