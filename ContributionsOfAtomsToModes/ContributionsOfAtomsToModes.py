@@ -130,42 +130,58 @@ class AtomicContributionToModes:
 
 		file.close()
 
-	def plot(self,grouping,freqstart=[],freqend=[],filename="Plot.eps"):
+	def plot(self,grouping,freqstart=[],freqend=[],freqlist=[],filename="Plot.eps"):
 		#grouping should be checked
 		#'GroupedAtoms', 'ColorsOfGroupedAtoms','Legend' have to be included	
 		#Check thtat the atoms are numbers
 		#
+		"""
+		freqstart min frequency of plot in cm-1
+		freqend max frequency of plot in cm-1
+		freqlist list of frequencies that will be plotted
+		"""
 		p={}
 		summe={}
+		if freqlist==[]:		
+			freqlist=range(len(self.__frequencies))
+			
+		else: 	
+			#Todo: Frequenzliste: von jedem Element 1 abziehen	
+			for freq in range(len(freqlist)):
+				freqlist[freq]=freqlist[freq]-1
+		
 		for group in range(len(grouping['GroupedAtoms'])):	
 			color1=grouping['ColorsOfGroupedAtoms'][group]
 			Entry={}		
-			for freq in range(len(self.__frequencies)):
-		       		Entry[freq]= 0
+			for freq in range(len(freqlist)):
+				Entry[freq]= 0
 			for number in grouping['GroupedAtoms'][group]:	
 				#set the first atom to 0
 				atom=int(number)-1
-				for freq in range(len(self.__frequencies)):
-                                       	Entry[freq]= Entry[freq]+ self.__get_Contributions(freq,atom)
+				for freq in range(len(freqlist)):
+					
+         	       			Entry[freq]= Entry[freq]+ self.__get_Contributions(freqlist[freq],atom)
 					if group==0:
 						summe[freq]=0	
+			print[Entry]
 			#plot bar chart
-			p[group]=plt.barh(np.arange(len(self.__frequencies)),Entry.values(),left=summe.values(),color=color1,height=1,label=grouping['Legend'][group] ) 
+			p[group]=plt.barh(np.arange(len(freqlist)),Entry.values(),left=summe.values(),color=color1,height=1,label=grouping['Legend'][group] ) 
 			#needed for "left" in the bar chart plot
-			for freq in range(len(self.__frequencies)):
+			for freq in range(len(freqlist)):
 				if group==0:
 					summe[freq]=Entry[freq]
 				else:
 					summe[freq]=summe[freq]+Entry[freq]			
-			
-		labeling={}	
-		for freq in range(len(self.__frequencies)):
+		labeling={}
+		for freq in range(len(freqlist)):
 			labeling[freq]=round(self.__frequencies[freq],1)
+			#details for the plot
 
-		#details for the plot
+	
+
 		plt.yticks(np.arange(0.5,len(self.__frequencies)+0.5),labeling.values())
 		#start and end of the yrange
-		start,end=self.__getfreqbordersforplot(freqstart,freqend)
+		start,end=self.__get_freqbordersforplot(freqstart,freqend,freqlist)
 		plt.ylim(start,end)
 		plt.xlim(0.0, 1.0)
 		plt.xlabel('Contribution of Atoms to Modes')
@@ -174,27 +190,29 @@ class AtomicContributionToModes:
 		plt.savefig(filename, bbox_inches="tight")
 		plt.show()
 		
+	#def __get_
 
-	def __getfreqbordersforplot(self,freqstart,freqend):
+
+	def __get_freqbordersforplot(self,freqstart,freqend,freqlist):
         	if freqstart==[]:
                         start=0.0
                 else:
-                        for freq in range(len(self.__frequencies)):
-                                if self.__frequencies[freq] > freqstart:
+                        for freq in range(len(freqlist)):
+                                if self.__frequencies[freqlist[freq]] > freqstart:
                                         start=freq
                                         break
                                 else:
-                                        end=len(self.__frequencies)
+                                        start=len(freqlist)
 
                 if freqend==[]:
-                        end=len(self.__frequencies)
+                        end=len(freqlist)
                 else:
-                        for freq in range(len(self.__frequencies)-1,0,-1):
-                                if self.__frequencies[freq] < freqend:
+                        for freq in range(len(freqlist)-1,0,-1):
+                                if self.__frequencies[freqlist[freq]] < freqend:
                                         end=freq+1
                                         break
                                 else:
-                                        end=len(self.__frequencies)
+                                        end=len(freqlist)
 
 		return start,end
  
