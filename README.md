@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/JaGeo/AtomicContributions/blob/master/LICENSE)
 
 # AtomicContributions
-This python package can visualize the contribution of each atom to the phonon modes at the Gamma point. To do so, you need [```Phonopy```](https://github.com/atztogo/phonopy) and VASP ([```VASP```])(https://www.vasp.at/). 
+This python package can visualize the contribution of each atom to the phonon modes at the Gamma point. To do so, you need [```Phonopy```](https://github.com/atztogo/phonopy) and VASP ([```VASP```]https://www.vasp.at/). 
 <hr></hr>
 
 What to cite
