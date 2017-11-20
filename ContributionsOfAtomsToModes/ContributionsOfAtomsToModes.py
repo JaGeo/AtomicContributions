@@ -188,8 +188,8 @@ class AtomicContributionToModes:
 			labeling[freq]=round(self.__frequencies[freqlist[freq]],1)
 			#details for the plot
 
-	
-
+		plt.rc("font", size=8)
+			
 		ax1.set_yticklabels(labeling.values())
 		ax1.set_yticks(np.arange(0.5,len(self.__frequencies)+0.5))
 		ax2 = ax1.twinx()
@@ -203,7 +203,9 @@ class AtomicContributionToModes:
 		ax1.set_xlabel('Contribution of Atoms to Modes')
 		ax1.set_ylabel('Wavenumber (cm-1)')
 		ax1.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left",mode="expand", borderaxespad=0, ncol=len(grouping['GroupedAtoms']))
+		
 		plt.savefig(filename, bbox_inches="tight")
+	
 		plt.show()
 		
 	def __get_freqbordersforplot(self,freqstart,freqend,freqlist):
