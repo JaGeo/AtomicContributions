@@ -135,6 +135,13 @@ class AtomicContributionToModes:
 		return self.__PercentageAtom[band,atom]
 		
 	def write_file(self,filename="Contributions.txt"):
+		"""
+		Writes contributions of each atom in file
+
+		args:
+		
+			filename (string): filename 
+		"""
 		file  = open(filename, 'w')
 		file.write('Frequency Atomare Beitraege \n')		
 		for freq in range(len(self.__frequencies)):
