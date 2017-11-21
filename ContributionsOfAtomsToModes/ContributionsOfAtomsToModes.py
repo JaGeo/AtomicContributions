@@ -129,7 +129,8 @@ class AtomicContributionToModes:
 	def __get_Contributions(self,band,atom):
 		"""
 		Gives contribution of specific atom to modes with certain frequency 
-		band (int): number of the frequency (ordered by energy)
+		args:
+			band (int): number of the frequency (ordered by energy)
 		"""
 		return self.__PercentageAtom[band,atom]
 		
@@ -146,9 +147,16 @@ class AtomicContributionToModes:
 
 	def plot(self,grouping,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
 		"""
-		freqstart min frequency of plot in cm-1
-		freqend max frequency of plot in cm-1
-		freqlist list of frequencies that will be plotted
+		Plots contributions of atoms/several atoms to modes with certain frequencies		
+		
+		args:
+	
+			grouping: dictionary that includes a list of atoms that are grouped (grouping['GroupedAtoms'], list of int), list of colors for the groups (grouping['ColorsOfGroupedAtoms'], list of 				string) and a legend for the groups (grouping['Legend'], list of string)
+			freqstart (float): min frequency of plot in cm-1
+			freqend (float): max frequency of plot in cm-1
+			freqlist (list of int): list of frequencies that will be plotted; if no list is given all frequencies in the range from freqstart to freqend are plotted
+			labelsforfreq (list of strings): list of labels (string) for each frequency
+			filename (string): filename for the plot
 		"""
 		fig, ax1 = plt.subplots()		
 		p={}
@@ -157,7 +165,7 @@ class AtomicContributionToModes:
 			freqlist=range(len(self.__frequencies))
 			
 		else: 	
-			#Todo: Frequenzliste: von jedem Element 1 abziehen	
+				
 			for freq in range(len(freqlist)):
 				freqlist[freq]=freqlist[freq]-1
 		
@@ -186,10 +194,8 @@ class AtomicContributionToModes:
 		labeling={}
 		for freq in range(len(freqlist)):
 			labeling[freq]=round(self.__frequencies[freqlist[freq]],1)
-			#details for the plot
-
+		#details for the plot
 		plt.rc("font", size=8)
-			
 		ax1.set_yticklabels(labeling.values())
 		ax1.set_yticks(np.arange(0.5,len(self.__frequencies)+0.5))
 		ax2 = ax1.twinx()

@@ -19,18 +19,9 @@ grouping['Legend']=['C','O','N','H']
 #lists all numbers of frequencies that are plotted, frequency numbers start at 1, not at 0
 #freqlist=[1,2,3,4]
 
-IRactiveModes= [1,3,6,9,11,14,17,19,23,25,27,29,31,33,36,37,40,41,44,45,48]
+IRactiveModes= [1,3,6,9,11,14,17,19,23,25,27,29,31,33,36,37,40,41,44,45,48]			
 
 LabelsForIRactiveModes=['E','B2','E','E','E','E','E','B2','E','E','B2','E','B2','E','B2','E','B2','E','B2','E','B2']
-
-
-
-
-
-
-
-
-
 
 
 
