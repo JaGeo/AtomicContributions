@@ -1,6 +1,7 @@
 #Copyright (C) 2017 Janine George
 
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 from phonopy import Phonopy
 from phonopy.interface.vasp import read_vasp
@@ -30,7 +31,7 @@ class AtomicContributionToModes:
 			primitive (list of lists): contains rotational matrix to arrive at primitive cell
 			
 		"""
-	
+		
 		self.__unitcell =read_vasp(PoscarName)
 		self.__supercell=supercell
 		self.__phonon= Phonopy(self.__unitcell,supercell_matrix=self.__supercell,primitive_matrix=primitive,factor=VaspToCm,symprec=symprec)
@@ -219,6 +220,10 @@ class AtomicContributionToModes:
 			labelsforfreq (list of strings): list of labels (string) for each frequency
 			filename (string): filename for the plot
 		"""
+		#setting of some parameters in matplotlib: http://matplotlib.org/users/customizing.html
+		mpl.rcParams["savefig.directory"] = os.chdir(os.getcwd())
+		mpl.rcParams["savefig.format"]='eps'
+		
 		fig, ax1 = plt.subplots()		
 		p={}
 		summe={}
