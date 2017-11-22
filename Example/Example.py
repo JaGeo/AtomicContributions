@@ -22,7 +22,7 @@ colorofgroups=['black','red','green','grey']
 legendforgroups=['C','O','N','H']
 
 test.plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups)
-test.plot_irred(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,IRREPS=['B2','E'])
+test.plot_irred(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,irreps=['B2','E'])
 
 #lists all numbers of frequencies that are plotted, frequency numbers start at 1, not at 0
 #freqlist=[1,2,3,4]

@@ -24,10 +24,8 @@ How to
 
 Todo
 --------
-1. IR and Raman active modes should be marked
-2. Mulliken Symbols should be shown
-3. Other functionalities
-4. Include tests
+1. Other functionalities
+2. Include tests
 
 Information about the Author
 --------

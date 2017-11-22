@@ -292,24 +292,30 @@ class AtomicContributionToModes:
 		return start,end
 
 
-	def plot_irred(self,atomgroups,colorofgroups,legendforgroups,IRREPS=[],filename="Plot.eps"):
+	def plot_irred(self,atomgroups,colorofgroups,legendforgroups,transmodes=False,irreps=[],filename="Plot.eps"):
 		"""
 		Plots contributions of atoms/several atoms to modes with certain irreducible representations (selected by Mulliken symbol)
 		args:
 			atomgroups (list of list of ints): list that groups atoms, atom numbers start at 1
 			colorofgroups (list of strings): list that matches a color to each group of atoms
 			legendforgroups (list of strings): list that gives a legend for each group of atoms
-			IRREPS (list of strings): list that includes the irreducible modes that are plotted
+			transmodes (boolean): translational modes are included if true
+			irreps (list of strings): list that includes the irreducible modes that are plotted
 			filename (string): filename for the plot
 		"""
-
+		
 		
 		freqlist=[]
 		labelsforfreq=[]
 		for band in range(len(self.__freqlist)):
-			if self.__IRLabels[band] in IRREPS:
-				freqlist.append(self.__freqlist[band])
-				labelsforfreq.append(self.__IRLabels[band])
+			if self.__IRLabels[band] in irreps:
+				if not transmodes:
+					if not self.__freqlist[band] in [0,1,2]:				
+						freqlist.append(self.__freqlist[band])
+						labelsforfreq.append(self.__IRLabels[band])
+				else:
+					freqlist.append(self.__freqlist[band])
+					labelsforfreq.append(self.__IRLabels[band])
 
 		
 		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename=filename,freqlist=freqlist,labelsforfreq=labelsforfreq)
