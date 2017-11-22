@@ -203,7 +203,7 @@ class AtomicContributionToModes:
 			for freq in range(len(freqlist)):
 				freqlist[freq]=freqlist[freq]-1
 		
-		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,freqstart=freqstart,freqend=freqend,freqlist=freqlist,labelsforfreq=labelsforfreq,filename="Plot.eps")
+		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,freqstart=freqstart,freqend=freqend,freqlist=freqlist,labelsforfreq=labelsforfreq,filename=filename)
 
 
 	def _plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
