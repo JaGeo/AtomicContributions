@@ -7,13 +7,16 @@ from phonopy.interface.vasp import read_vasp
 from phonopy.file_IO import parse_FORCE_SETS, parse_BORN, write_FORCE_CONSTANTS, parse_FORCE_CONSTANTS
 from phonopy.structure.atoms import PhonopyAtoms
 from phonopy.units import VaspToCm, VaspToTHz
+from phonopy.phonon.irreps import IrReps
+from phonopy.phonon.degeneracy import degenerate_sets as get_degenerate_sets
+
 import os
 
 
 
 class AtomicContributionToModes:
 
-	def __init__(self,PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',BornFileName='BORN',supercell=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],nac=False,symprec=1e-5,masses=[],primitive=[[1, 0, 0],[0, 1, 0], [0, 0, 1]]):
+	def __init__(self,PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',BornFileName='BORN',supercell=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],nac=False,symprec=1e-5,masses=[],primitive=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],degeneracy_tolerance=1e-4):
 		"""Class that calculates contributions of each atom to the phonon modes at Gamma
 			Args:
 			PoscarNamse (str): name of the POSCAR that was used for the phonon calculation
@@ -70,8 +73,17 @@ class AtomicContributionToModes:
 		#Get dipole approximation of the intensitiess
 		self.__set_Contributions()
 		
+		#irrepsobject
+		self.__phonon.set_dynamical_matrix()
+		self.__Irrep=IrReps(dynamical_matrix=self.__phonon._dynamical_matrix,q=[0, 0, 0],is_little_cogroup=False,nac_q_direction=None,degeneracy_tolerance=degeneracy_tolerance,factor=VaspToCm)
+		self.__Irrep.run()
+		self.__IRLabels=self.__Irrep._get_ir_labels()
+		#Frequenzliste so anpassen dass entartete Moden nicht mehr vorkommen
+		self.__ListOfModesWithDegeneracy=self.__Irrep._get_degenerate_sets()
 		
-	
+		self.__freqlist={}
+		for band in range(len(self.__ListOfModesWithDegeneracy)):
+			self.__freqlist[band]=self.__ListOfModesWithDegeneracy[band][0]
 
 
 	def __FormatEigenvectors(self):
@@ -134,6 +146,12 @@ class AtomicContributionToModes:
 		"""
 		return self.__PercentageAtom[band,atom]
 		
+	
+	
+
+	
+	
+	
 	def write_file(self,filename="Contributions.txt"):
 		"""
 		Writes contributions of each atom in file
@@ -152,36 +170,65 @@ class AtomicContributionToModes:
 
 		file.close()
 
-	def plot(self,grouping,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
+#koennte interne plotfunktion aufmachen die mit freqlist bei 0 anfaengt
+
+	def plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
 		"""
-		Plots contributions of atoms/several atoms to modes with certain frequencies		
+		Plots contributions of atoms/several atoms to modes with certain frequencies (freqlist starts at 1 here)	
 		
 		args:
-	
-			grouping: dictionary that includes a list of atoms that are grouped (grouping['GroupedAtoms'], list of int), list of colors for the groups (grouping['ColorsOfGroupedAtoms'], list of 				string) and a legend for the groups (grouping['Legend'], list of string)
+			atomgroups (list of list of ints): list that groups atoms, atom numbers start at 1
+			colorofgroups (list of strings): list that matches a color to each group of atoms
+			legendforgroups (list of strings): list that gives a legend for each group of atoms
 			freqstart (float): min frequency of plot in cm-1
 			freqend (float): max frequency of plot in cm-1
-			freqlist (list of int): list of frequencies that will be plotted; if no list is given all frequencies in the range from freqstart to freqend are plotted
+			freqlist (list of int): list of frequencies that will be plotted; if no list is given all frequencies in the range from freqstart to freqend are plotted, list begins at 1
 			labelsforfreq (list of strings): list of labels (string) for each frequency
 			filename (string): filename for the plot
 		"""
-		fig, ax1 = plt.subplots()		
+		
 		p={}
 		summe={}
+		if labelsforfreq==[]:		
+			labelsforfreq=self.__IRLabels
+		#Todo: Entartung behandeln
+
+
 		if freqlist==[]:		
-			freqlist=range(len(self.__frequencies))
+			freqlist=self.__freqlist
 			
 		else: 	
 				
 			for freq in range(len(freqlist)):
 				freqlist[freq]=freqlist[freq]-1
 		
-		for group in range(len(grouping['GroupedAtoms'])):	
-			color1=grouping['ColorsOfGroupedAtoms'][group]
+		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,freqstart=freqstart,freqend=freqend,freqlist=freqlist,labelsforfreq=labelsforfreq,filename="Plot.eps")
+
+
+	def _plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
+		"""
+		Plots contributions of atoms/several atoms to modes with certain frequencies (freqlist starts at 0 here)		
+		
+		args:
+			atomgroups (list of list of ints): list that groups atoms, atom numbers start at 1
+			colorofgroups (list of strings): list that matches a color to each group of atoms
+			legendforgroups (list of strings): list that gives a legend for each group of atoms	
+			freqstart (float): min frequency of plot in cm-1
+			freqend (float): max frequency of plot in cm-1
+			freqlist (list of int): list of frequencies that will be plotted; this freqlist starts at 0
+			labelsforfreq (list of strings): list of labels (string) for each frequency
+			filename (string): filename for the plot
+		"""
+		fig, ax1 = plt.subplots()		
+		p={}
+		summe={}
+				
+		for group in range(len(atomgroups)):	
+			color1=colorofgroups[group]
 			Entry={}		
 			for freq in range(len(freqlist)):
 				Entry[freq]= 0
-			for number in grouping['GroupedAtoms'][group]:	
+			for number in atomgroups[group]:	
 				#set the first atom to 0
 				atom=int(number)-1
 				for freq in range(len(freqlist)):
@@ -191,7 +238,7 @@ class AtomicContributionToModes:
 						summe[freq]=0	
 			
 			#plot bar chart
-			p[group]=ax1.barh(np.arange(len(freqlist)),Entry.values(),left=summe.values(),color=color1,height=1,label=grouping['Legend'][group] ) 
+			p[group]=ax1.barh(np.arange(len(freqlist)),Entry.values(),left=summe.values(),color=color1,height=1,label=legendforgroups[group] ) 
 			#needed for "left" in the bar chart plot
 			for freq in range(len(freqlist)):
 				if group==0:
@@ -215,7 +262,7 @@ class AtomicContributionToModes:
 		ax1.set_xlim(0.0, 1.0)
 		ax1.set_xlabel('Contribution of Atoms to Modes')
 		ax1.set_ylabel('Wavenumber (cm-1)')
-		ax1.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left",mode="expand", borderaxespad=0, ncol=len(grouping['GroupedAtoms']))
+		ax1.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left",mode="expand", borderaxespad=0, ncol=len(atomgroups))
 		
 		plt.savefig(filename, bbox_inches="tight")
 	
@@ -243,6 +290,30 @@ class AtomicContributionToModes:
                                         end=len(freqlist)
 
 		return start,end
+
+
+	def plot_irred(self,atomgroups,colorofgroups,legendforgroups,IRREPS=[],filename="Plot.eps"):
+		"""
+		Plots contributions of atoms/several atoms to modes with certain irreducible representations (selected by Mulliken symbol)
+		args:
+			atomgroups (list of list of ints): list that groups atoms, atom numbers start at 1
+			colorofgroups (list of strings): list that matches a color to each group of atoms
+			legendforgroups (list of strings): list that gives a legend for each group of atoms
+			IRREPS (list of strings): list that includes the irreducible modes that are plotted
+			filename (string): filename for the plot
+		"""
+
+		
+		freqlist=[]
+		labelsforfreq=[]
+		for band in range(len(self.__freqlist)):
+			if self.__IRLabels[band] in IRREPS:
+				freqlist.append(self.__freqlist[band])
+				labelsforfreq.append(self.__IRLabels[band])
+
+		
+		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename=filename,freqlist=freqlist,labelsforfreq=labelsforfreq)
  
+
 #more functions planned: only show IR or Raman active modes automatically
 #listen uebergeben, die frequenznummern enthalten und nur diese plotten
