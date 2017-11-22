@@ -313,7 +313,7 @@ class AtomicContributionToModes:
 		return start,end
 
 
-	def plot_irred(self,atomgroups,colorofgroups,legendforgroups,transmodes=False,irreps=[],filename="Plot.eps"):
+	def plot_irred(self,atomgroups,colorofgroups,legendforgroups,transmodes=False,irreps=[],filename="Plot.eps",freqstart=[],freqend=[]):
 		"""
 		Plots contributions of atoms/several atoms to modes with certain irreducible representations (selected by Mulliken symbol)
 		args:
@@ -339,7 +339,7 @@ class AtomicContributionToModes:
 					labelsforfreq.append(self.__IRLabels[band])
 
 		
-		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename=filename,freqlist=freqlist,labelsforfreq=labelsforfreq)
+		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename=filename,freqlist=freqlist,labelsforfreq=labelsforfreq,freqstart=freqstart,freqend=freqend)
  
 
 

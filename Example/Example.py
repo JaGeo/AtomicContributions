@@ -1,9 +1,9 @@
 from ContributionsOfAtomsToModes  import AtomicContributionToModes 
-from phonopy.units import VaspToCm, VaspToEv
+from phonopy.units import VaspToCm
 
 
 #Initialize AtomicContributionToModes 
-test=AtomicContributionToModes(PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',supercell=[[3, 0, 0],[0, 3, 0], [0, 0, 4]],factor=VaspToEv*1000)
+test=AtomicContributionToModes(PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',supercell=[[3, 0, 0],[0, 3, 0], [0, 0, 4]])
 
 
 #write a file with atomic contributions to each mode
