@@ -7,7 +7,7 @@ from phonopy import Phonopy
 from phonopy.interface.vasp import read_vasp
 from phonopy.file_IO import parse_FORCE_SETS, parse_BORN, write_FORCE_CONSTANTS, parse_FORCE_CONSTANTS
 from phonopy.structure.atoms import PhonopyAtoms
-from phonopy.units import VaspToCm, VaspToTHz
+from phonopy.units import VaspToCm, VaspToTHz,VaspToEv
 from phonopy.phonon.irreps import IrReps
 from phonopy.phonon.degeneracy import degenerate_sets as get_degenerate_sets
 
@@ -17,7 +17,7 @@ import os
 
 class AtomicContributionToModes:
 
-	def __init__(self,PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',BornFileName='BORN',supercell=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],nac=False,symprec=1e-5,masses=[],primitive=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],degeneracy_tolerance=1e-4):
+	def __init__(self,PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',BornFileName='BORN',supercell=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],nac=False,symprec=1e-5,masses=[],primitive=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],degeneracy_tolerance=1e-4,factor=VaspToCm,q=[0,0,0]):
 		"""Class that calculates contributions of each atom to the phonon modes at Gamma
 			Args:
 			PoscarNamse (str): name of the POSCAR that was used for the phonon calculation
@@ -29,15 +29,17 @@ class AtomicContributionToModes:
 			symprec (float): contains symprec tag as used in Phonopy
 			masses (list): Masses in this list are used instead of the ones prepared in Phonopy. Useful for isotopes.
 			primitive (list of lists): contains rotational matrix to arrive at primitive cell
+			factor (float): VaspToCm or VaspToTHz or VaspToEv
+			q (list of int): q point for the plot. So far only Gamma works
 			
 		"""
 		
 		self.__unitcell =read_vasp(PoscarName)
 		self.__supercell=supercell
-		self.__phonon= Phonopy(self.__unitcell,supercell_matrix=self.__supercell,primitive_matrix=primitive,factor=VaspToCm,symprec=symprec)
+		self.__phonon= Phonopy(self.__unitcell,supercell_matrix=self.__supercell,primitive_matrix=primitive,factor=factor,symprec=symprec)
 	        self.__natoms=self.__phonon.get_primitive().get_number_of_atoms()	
 		self.__symbols= self.__phonon.get_primitive().get_chemical_symbols()
-
+		self.__factor=factor
 		#If different masses are supplied
 		if masses: 
 			self.__phonon.set_masses(masses)
@@ -62,7 +64,7 @@ class AtomicContributionToModes:
                 	self.__BORN_CHARGES=BORN_file['born']
 			self.__phonon.set_nac_params(BORN_file)
 		#frequencies and eigenvectors at Gamma
-		self.__frequencies,self.__eigvecs=self.__phonon.get_frequencies_with_eigenvectors([0, 0, 0])
+		self.__frequencies,self.__eigvecs=self.__phonon.get_frequencies_with_eigenvectors(q)
 	
 
 
@@ -75,16 +77,23 @@ class AtomicContributionToModes:
 		self.__set_Contributions()
 		
 		#irrepsobject
-		self.__phonon.set_dynamical_matrix()
-		self.__Irrep=IrReps(dynamical_matrix=self.__phonon._dynamical_matrix,q=[0, 0, 0],is_little_cogroup=False,nac_q_direction=None,degeneracy_tolerance=degeneracy_tolerance,factor=VaspToCm)
-		self.__Irrep.run()
-		self.__IRLabels=self.__Irrep._get_ir_labels()
+		self.__set_IRLabels(phonon=self.__phonon,degeneracy_tolerance=degeneracy_tolerance,factor=factor,q=q)
+		
 		#Frequenzliste so anpassen dass entartete Moden nicht mehr vorkommen
 		self.__ListOfModesWithDegeneracy=self.__Irrep._get_degenerate_sets()
 		
 		self.__freqlist={}
 		for band in range(len(self.__ListOfModesWithDegeneracy)):
 			self.__freqlist[band]=self.__ListOfModesWithDegeneracy[band][0]
+
+	def __set_IRLabels(self,phonon,degeneracy_tolerance,factor,q):
+		phonon.set_dynamical_matrix()
+		self.__Irrep=IrReps(dynamical_matrix=phonon._dynamical_matrix,q=q,is_little_cogroup=False,nac_q_direction=None,degeneracy_tolerance=degeneracy_tolerance,factor=factor)
+		self.__Irrep.run()
+		self.__IRLabels=self.__Irrep._get_ir_labels()
+		
+
+
 
 
 	def __FormatEigenvectors(self):
@@ -162,7 +171,7 @@ class AtomicContributionToModes:
 			filename (string): filename 
 		"""
 		file  = open(filename, 'w')
-		file.write('Frequency Atomare Beitraege \n')		
+		file.write('Frequency Contributions \n')		
 		for freq in range(len(self.__frequencies)):
 			file.write('%s ' % (self.__frequencies[freq]))
 			for atom in range(self.__natoms):
@@ -266,7 +275,14 @@ class AtomicContributionToModes:
 		ax2.set_ylim(start,end)
 		ax1.set_xlim(0.0, 1.0)
 		ax1.set_xlabel('Contribution of Atoms to Modes')
-		ax1.set_ylabel('Wavenumber (cm-1)')
+		if self.__factor==VaspToCm:
+			ax1.set_ylabel('Wavenumber (cm-1)')
+		elif self.__factor==VaspToTHz:
+			ax1.set_ylabel('Frequency (THz)')
+		elif self.__factor==VaspToEv:
+			ax1.set_ylabel('Frequency (eV)')
+		else:
+			ax1.set_ylabel('Frequency')
 		ax1.legend(bbox_to_anchor=(0,1.02,1,0.2), loc="lower left",mode="expand", borderaxespad=0, ncol=len(atomgroups))
 		
 		plt.savefig(filename, bbox_inches="tight")
