@@ -31,5 +31,5 @@ Information about the Author
 --------
 
 - J. George (RWTH Aachen University)
-- PI during the development of the code: R. Dronskowski, RWTH Aachen University
+- PI during the development of the code: [R. Dronskowski, RWTH Aachen University](http://www.ssc.rwth-aachen.de/)
 
