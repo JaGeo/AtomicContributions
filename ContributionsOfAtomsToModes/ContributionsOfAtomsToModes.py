@@ -47,22 +47,19 @@ class AtomicContributionToModes:
 	
 		#Forces or Force Constants
 		if not ForceConstants:
-			self.__force_sets = parse_FORCE_SETS(filename=ForceFileName)
-			self.__phonon.set_displacement_dataset(self.__force_sets)
-			self.__phonon.produce_force_constants()
+			self.__set_ForcesSets(filename=ForceFileName,phonon=self.__phonon)
 		
 		if ForceConstants:
-			force_constants = parse_FORCE_CONSTANTS(filename=ForceFileName)
-			self.__phonon.set_force_constants(force_constants)
+			self.__ForceConstants(filename=ForceFileName,phonon=self.__phonon)
 	
-
-
 
 		#Apply NAC Correction
                 if nac:
                    	BORN_file = parse_BORN(self.__phonon.get_primitive(),filename=BornFileName)
                 	self.__BORN_CHARGES=BORN_file['born']
 			self.__phonon.set_nac_params(BORN_file)
+		
+
 		#frequencies and eigenvectors at Gamma
 		self.__frequencies,self.__eigvecs=self.__phonon.get_frequencies_with_eigenvectors(q)
 	
@@ -79,21 +76,41 @@ class AtomicContributionToModes:
 		#irrepsobject
 		self.__set_IRLabels(phonon=self.__phonon,degeneracy_tolerance=degeneracy_tolerance,factor=factor,q=q)
 		
-		#Frequenzliste so anpassen dass entartete Moden nicht mehr vorkommen
-		self.__ListOfModesWithDegeneracy=self.__Irrep._get_degenerate_sets()
 		
-		self.__freqlist={}
-		for band in range(len(self.__ListOfModesWithDegeneracy)):
-			self.__freqlist[band]=self.__ListOfModesWithDegeneracy[band][0]
+		
+		
+	def __set_ForcesSets(self,filename,phonon):
+		"""
+		sets forces
+
+		"""
+
+		force_sets = parse_FORCE_SETS(filename=filename)
+		phonon.set_displacement_dataset(force_sets)
+		phonon.produce_force_constants()
+		
+
+
+	def __set_ForceConstants(self,filename,phonon):
+		"""
+		sets force constants
+		"""
+		force_constants = parse_FORCE_CONSTANTS(filename=filename)
+		phonon.set_force_constants(force_constants)	
 
 	def __set_IRLabels(self,phonon,degeneracy_tolerance,factor,q):
+		"""
+		sets list of irreducible labels and list of frequencies without degeneracy 
+		"""
 		phonon.set_dynamical_matrix()
 		self.__Irrep=IrReps(dynamical_matrix=phonon._dynamical_matrix,q=q,is_little_cogroup=False,nac_q_direction=None,degeneracy_tolerance=degeneracy_tolerance,factor=factor)
 		self.__Irrep.run()
 		self.__IRLabels=self.__Irrep._get_ir_labels()
 		
-
-
+		self.__ListOfModesWithDegeneracy=self.__Irrep._get_degenerate_sets()
+		self.__freqlist={}
+		for band in range(len(self.__ListOfModesWithDegeneracy)):
+			self.__freqlist[band]=self.__ListOfModesWithDegeneracy[band][0]
 
 
 	def __FormatEigenvectors(self):
