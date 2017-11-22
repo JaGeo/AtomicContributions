@@ -170,7 +170,7 @@ class AtomicContributionToModes:
 
 		file.close()
 
-#koennte interne plotfunktion aufmachen die mit freqlist bei 0 anfaengt
+
 
 	def plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
 		"""
@@ -191,7 +191,7 @@ class AtomicContributionToModes:
 		summe={}
 		if labelsforfreq==[]:		
 			labelsforfreq=self.__IRLabels
-		#Todo: Entartung behandeln
+
 
 
 		if freqlist==[]:		
@@ -321,5 +321,4 @@ class AtomicContributionToModes:
 		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename=filename,freqlist=freqlist,labelsforfreq=labelsforfreq)
  
 
-#more functions planned: only show IR or Raman active modes automatically
-#listen uebergeben, die frequenznummern enthalten und nur diese plotten
+
