@@ -24,7 +24,6 @@ How to
 Result
 ------
 
-![alt text](https://github.com/JaGeo/AtomicContributions/blob/master/Example/allmodes.eps)
 
 
 
