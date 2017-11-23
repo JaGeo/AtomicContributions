@@ -25,7 +25,7 @@ class AtomicContributionToModes:
 			ForceConstants (boolean): If True, ForceConstants are read in. If False, forces are read in.
 			ForceFileName (str): name of the file including force constants or forces
 			supercell (list of lists): reads in supercell
-			nac (boolean): If true, NAC is applied.
+			nac (boolean): If true, NAC is applied. (please be careful if you give a primitive cell. NAC should then be calculated for primitive cell)
 			symprec (float): contains symprec tag as used in Phonopy
 			masses (list): Masses in this list are used instead of the ones prepared in Phonopy. Useful for isotopes.
 			primitive (list of lists): contains rotational matrix to arrive at primitive cell
@@ -77,8 +77,10 @@ class AtomicContributionToModes:
 		self.__set_IRLabels(phonon=self.__phonon,degeneracy_tolerance=degeneracy_tolerance,factor=factor,q=q)
 		
 		
-		
-		
+	
+	def show_primitivecell(self):	
+		print(self.__phonon.get_primitive())
+
 	def __set_ForcesSets(self,filename,phonon):
 		"""
 		sets forces
