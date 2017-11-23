@@ -21,6 +21,12 @@ How to
 5. Copy an example script, adapt the names of the files and the supercell size (the one you used for the phonon calculation!)
 6. Run the script
 
+Result
+------
+
+![alt text](https://github.com/JaGeo/AtomicContributions/blob/master/Example/allmodes.eps)
+
+
 
 Todo
 --------
