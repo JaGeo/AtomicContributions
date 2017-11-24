@@ -78,7 +78,10 @@ class AtomicContributionToModes:
 		
 		
 	
-	def show_primitivecell(self):	
+	def show_primitivecell(self):
+		"""
+		shows primitive cell used for the plots and evalualtions on screen
+		"""
 		print(self.__phonon.get_primitive())
 
 	def __set_ForcesSets(self,filename,phonon):
@@ -187,7 +190,7 @@ class AtomicContributionToModes:
 
 		args:
 		
-			filename (string): filename 
+			filename (str): filename 
 		"""
 		file  = open(filename, 'w')
 		file.write('Frequency Contributions \n')		
@@ -207,14 +210,14 @@ class AtomicContributionToModes:
 		
 		args:
 			atomgroups (list of list of ints): list that groups atoms, atom numbers start at 1
-			colorofgroups (list of strings): list that matches a color to each group of atoms
-			legendforgroups (list of strings): list that gives a legend for each group of atoms
+			colorofgroups (list of str): list that matches a color to each group of atoms
+			legendforgroups (list of str): list that gives a legend for each group of atoms
 			freqstart (float): min frequency of plot in cm-1
 			freqend (float): max frequency of plot in cm-1
 			freqlist (list of int): list of frequencies that will be plotted; if no list is given all frequencies in the range from freqstart to freqend are plotted, list begins at 1
-			labelsforfreq (list of strings): list of labels (string) for each frequency
-			filename (string): filename for the plot
-			transmode (boolean): if transmode is true than translational modes are shown
+			labelsforfreq (list of str): list of labels (str) for each frequency
+			filename (str): filename for the plot
+			transmodes (boolean): if transmode is true than translational modes are shown
 		"""
 		
 		p={}
@@ -256,13 +259,13 @@ class AtomicContributionToModes:
 		
 		args:
 			atomgroups (list of list of ints): list that groups atoms, atom numbers start at 1
-			colorofgroups (list of strings): list that matches a color to each group of atoms
-			legendforgroups (list of strings): list that gives a legend for each group of atoms	
+			colorofgroups (list of str): list that matches a color to each group of atoms
+			legendforgroups (list of str): list that gives a legend for each group of atoms	
 			freqstart (float): min frequency of plot in cm-1
 			freqend (float): max frequency of plot in cm-1
 			freqlist (list of int): list of frequencies that will be plotted; this freqlist starts at 0
-			labelsforfreq (list of strings): list of labels (string) for each frequency
-			filename (string): filename for the plot
+			labelsforfreq (list of str): list of labels (str) for each frequency
+			filename (str): filename for the plot
 		"""
 		#setting of some parameters in matplotlib: http://matplotlib.org/users/customizing.html
 		mpl.rcParams["savefig.directory"] = os.chdir(os.getcwd())
@@ -353,11 +356,11 @@ class AtomicContributionToModes:
 		Plots contributions of atoms/several atoms to modes with certain irreducible representations (selected by Mulliken symbol)
 		args:
 			atomgroups (list of list of ints): list that groups atoms, atom numbers start at 1
-			colorofgroups (list of strings): list that matches a color to each group of atoms
-			legendforgroups (list of strings): list that gives a legend for each group of atoms
+			colorofgroups (list of str): list that matches a color to each group of atoms
+			legendforgroups (list of str): list that gives a legend for each group of atoms
 			transmodes (boolean): translational modes are included if true
-			irreps (list of strings): list that includes the irreducible modes that are plotted
-			filename (string): filename for the plot
+			irreps (list of str): list that includes the irreducible modes that are plotted
+			filename (str): filename for the plot
 		"""
 		
 		
