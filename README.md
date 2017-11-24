@@ -24,7 +24,7 @@ How to
 Result
 ------
 
-
+![all text](https://github.com/JaGeo/AtomicContributions/blob/master/Doc/allmodes.png)
 
 
 Todo
