@@ -311,7 +311,7 @@ class AtomicContributionToModes:
 		ax1.set_xlim(0.0, 1.0)
 		ax1.set_xlabel('Contribution of Atoms to Modes')
 		if self.__factor==VaspToCm:
-			ax1.set_ylabel('Wavenumber (cm-1)')
+			ax1.set_ylabel('Wavenumber (cm$^{-1}$)')
 		elif self.__factor==VaspToTHz:
 			ax1.set_ylabel('Frequency (THz)')
 		elif self.__factor==VaspToEv:
