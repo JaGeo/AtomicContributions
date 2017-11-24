@@ -201,7 +201,7 @@ class AtomicContributionToModes:
 
 
 
-	def plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
+	def plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps",transmodes=True):
 		"""
 		Plots contributions of atoms/several atoms to modes with certain frequencies (freqlist starts at 1 here)	
 		
@@ -214,6 +214,7 @@ class AtomicContributionToModes:
 			freqlist (list of int): list of frequencies that will be plotted; if no list is given all frequencies in the range from freqstart to freqend are plotted, list begins at 1
 			labelsforfreq (list of strings): list of labels (string) for each frequency
 			filename (string): filename for the plot
+			transmode (boolean): if transmode is true than translational modes are shown
 		"""
 		
 		p={}
@@ -230,8 +231,23 @@ class AtomicContributionToModes:
 				
 			for freq in range(len(freqlist)):
 				freqlist[freq]=freqlist[freq]-1
+
+		newfreqlist=[]
+		newlabelsforfreq=[]
+		for freq in range(len(freqlist)):
+			if not transmodes:
+				if not freqlist[freq] in [0,1,2]:				
+					newfreqlist.append(freqlist[freq])
+					newlabelsforfreq.append(labelsforfreq[freq])
+					
+
+			else:
+				newfreqlist.append(freqlist[freq])
+				newlabelsforfreq.append(labelsforfreq[freq])
+
+
 		
-		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,freqstart=freqstart,freqend=freqend,freqlist=freqlist,labelsforfreq=labelsforfreq,filename=filename)
+		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,freqstart=freqstart,freqend=freqend,freqlist=newfreqlist,labelsforfreq=newlabelsforfreq,filename=filename)
 
 
 	def _plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):

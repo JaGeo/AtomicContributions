@@ -17,7 +17,7 @@ colorofgroups=['black','red','green','grey'] #this list gives the colors for the
 legendforgroups=['C','O','N','H'] #this list gives the legend for the grouped atoms
 
 #Plot with all modes
-test.plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename='allmodes.eps')
+test.plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename='allmodes.eps',transmodes=False)
 
 #Plot with modes that have the irreducible representation B2 and E (leaves out translational modes by default)
 #Have a look at https://github.com/atztogo/phonopy/blob/master/phonopy/phonon/irreps.py for the strings you need to represent the irreducible representations
