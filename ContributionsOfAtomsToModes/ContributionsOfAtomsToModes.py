@@ -37,13 +37,13 @@ class AtomicContributionToModes:
 		self.__unitcell =read_vasp(PoscarName)
 		self.__supercell=supercell
 		self.__phonon= Phonopy(self.__unitcell,supercell_matrix=self.__supercell,primitive_matrix=primitive,factor=factor,symprec=symprec)
-	        self.__natoms=self.__phonon.get_primitive().get_number_of_atoms()	
+		self.__natoms=self.__phonon.get_primitive().get_number_of_atoms()	
 		self.__symbols= self.__phonon.get_primitive().get_chemical_symbols()
 		self.__factor=factor
 		#If different masses are supplied
 		if masses: 
 			self.__phonon.set_masses(masses)
-                self.__masses=self.__phonon.get_primitive().get_masses() 
+		self.__masses=self.__phonon.get_primitive().get_masses() 
 	
 		#Forces or Force Constants
 		if not ForceConstants:
@@ -54,9 +54,9 @@ class AtomicContributionToModes:
 	
 
 		#Apply NAC Correction
-                if nac:
-                   	BORN_file = parse_BORN(self.__phonon.get_primitive(),filename=BornFileName)
-                	self.__BORN_CHARGES=BORN_file['born']
+		if nac:
+			BORN_file = parse_BORN(self.__phonon.get_primitive(),filename=BornFileName)
+			self.__BORN_CHARGES=BORN_file['born']
 			self.__phonon.set_nac_params(BORN_file)
 		
 
@@ -126,10 +126,10 @@ class AtomicContributionToModes:
 		self.__EigFormat = {}
 		for alpha in  range(self.__NumberOfBands):
 			laufer=0
-    	 	   	for beta in range(self.__natoms):
-        			for xyz in range(0,3):
-      	    	     	 		self.__EigFormat[beta,alpha,xyz]=self.__eigvecs[laufer][alpha]
-                       			laufer=laufer+1
+			for beta in range(self.__natoms):
+				for xyz in range(0,3):
+					self.__EigFormat[beta,alpha,xyz]=self.__eigvecs[laufer][alpha]
+					laufer=laufer+1
 
 	def __Eigenvector(self, atom, band, xoryorz ):
 		"""
@@ -284,8 +284,7 @@ class AtomicContributionToModes:
 				#set the first atom to 0
 				atom=int(number)-1
 				for freq in range(len(freqlist)):
-					
-         	       			Entry[freq]= Entry[freq]+ self.__get_Contributions(freqlist[freq],atom)
+					Entry[freq]= Entry[freq]+ self.__get_Contributions(freqlist[freq],atom)
 					if group==0:
 						summe[freq]=0	
 			
@@ -328,27 +327,26 @@ class AtomicContributionToModes:
 		plt.show()
 		
 	def __get_freqbordersforplot(self,freqstart,freqend,freqlist):
-        	if freqstart==[]:
-                        start=0.0
-                else:
-                        for freq in range(len(freqlist)):
-                                if self.__frequencies[freqlist[freq]] > freqstart:
-                                        start=freq
-                                        break
-                                else:
-                                        start=len(freqlist)
+			if freqstart==[]:
+				start=0.0
+			else:
+				for freq in range(len(freqlist)):
+					if self.__frequencies[freqlist[freq]] > freqstart:
+						start=freq
+						break
+					else:
+						start=len(freqlist)
+			if freqend==[]:
+				end=len(freqlist)
+			else:
+				for freq in range(len(freqlist)-1,0,-1):
+					if self.__frequencies[freqlist[freq]] < freqend:
+						end=freq+1
+						break
+					else:
+						end=len(freqlist)
 
-                if freqend==[]:
-                        end=len(freqlist)
-                else:
-                        for freq in range(len(freqlist)-1,0,-1):
-                                if self.__frequencies[freqlist[freq]] < freqend:
-                                        end=freq+1
-                                        break
-                                else:
-                                        end=len(freqlist)
-
-		return start,end
+			return start,end
 
 
 	def plot_irred(self,atomgroups,colorofgroups,legendforgroups,transmodes=False,irreps=[],filename="Plot.eps",freqstart=[],freqend=[]):
