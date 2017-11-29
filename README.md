@@ -30,7 +30,7 @@ Result
 Todo
 --------
 1. Other functionalities
-2. Include tests
+2. Include error handling
 
 Information about the Author
 --------
