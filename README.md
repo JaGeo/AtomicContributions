@@ -10,7 +10,7 @@ Please cite this repository. Of course, also [```VASP```](https://www.vasp.at/) 
 
 Intallation
 -----------
-To use this package you need to install [```Phonopy```](https://github.com/atztogo/phonopy) correctly. Furthermore, ```numpy``` and ```matplotlib``` are required. Also, the python path should be exported correctly. So far, it is only tested with Python2.7. 
+To use this package you need to install [```Phonopy```](https://github.com/atztogo/phonopy) correctly. Furthermore, ```numpy``` and ```matplotlib``` are required. Also, the python path should be exported correctly. 
 
 How to
 --------
