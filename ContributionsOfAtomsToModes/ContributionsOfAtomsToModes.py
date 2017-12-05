@@ -81,7 +81,7 @@ class AtomicContributionToModes:
 	
 	def show_primitivecell(self):
 		"""
-		shows primitive cell used for the plots and evalualtions on screen
+		shows primitive cell used for the plots and evaluations on screen
 		"""
 		print(self.__phonon.get_primitive())
 
