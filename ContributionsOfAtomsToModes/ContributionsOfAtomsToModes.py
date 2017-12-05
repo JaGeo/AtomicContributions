@@ -72,6 +72,7 @@ class AtomicContributionToModes:
 
 		#Get dipole approximation of the intensitiess
 		self.__set_Contributions()
+		self.__set_Contributions_withoutmassweight()
 		
 		#irrepsobject
 		self.__set_IRLabels(phonon=self.__phonon,degeneracy_tolerance=degeneracy_tolerance,factor=factor,q=q)
@@ -181,6 +182,40 @@ class AtomicContributionToModes:
 	
 	
 
+	def __set_Contributions_withoutmassweight(self):
+		"""
+		Calculate contribution of each atom to modes
+		Here, eigenvectors divided by sqrt(mass of the atom) are used for the calculation
+		"""
+		self.__PercentageAtom_massweight = {}
+		atomssum={}
+		saver={}
+		for freq in range(len(self.__frequencies)):
+			atomssum[freq]=0;
+			for atom in range(self.__natoms):
+				sum=0;
+				for alpha in range(3):
+					sum=sum+abs(self.__massEig(atom,freq,alpha)*self.__massEig(atom,freq,alpha))
+				atomssum[freq]=atomssum[freq]+sum	
+				
+		#Hier muss noch was hin, damit rechnung richtig wird
+				saver[freq,atom]=sum
+		
+		for freq in range(len(self.__frequencies)):
+			for atom in range(self.__natoms):
+				self.__PercentageAtom_massweight[freq,atom]=saver[freq,atom]/atomssum[freq]
+
+
+
+	def __get_Contributions_withoutmassweight(self,band,atom):
+		"""
+		Gives contribution of specific atom to modes with certain frequency
+		Here, eigenvectors divided by sqrt(mass of the atom) are used for the calculation
+		
+		args:
+       			band (int): number of the frequency (ordered by energy)
+		"""
+		return self.__PercentageAtom_massweight[band,atom]
 	
 	
 	
@@ -204,7 +239,9 @@ class AtomicContributionToModes:
 
 
 
-	def plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps",transmodes=True):
+
+
+	def plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps",transmodes=True,massincluded=True):
 		"""
 		Plots contributions of atoms/several atoms to modes with certain frequencies (freqlist starts at 1 here)	
 		
@@ -218,6 +255,7 @@ class AtomicContributionToModes:
 			labelsforfreq (list of str): list of labels (str) for each frequency
 			filename (str): filename for the plot
 			transmodes (boolean): if transmode is true than translational modes are shown
+			massincluded (boolean): uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
 		"""
 		
 		p={}
@@ -250,10 +288,10 @@ class AtomicContributionToModes:
 
 
 		
-		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,freqstart=freqstart,freqend=freqend,freqlist=newfreqlist,labelsforfreq=newlabelsforfreq,filename=filename)
+		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,freqstart=freqstart,freqend=freqend,freqlist=newfreqlist,labelsforfreq=newlabelsforfreq,filename=filename,massincluded=massincluded)
 
 
-	def _plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps"):
+	def _plot(self,atomgroups,colorofgroups,legendforgroups,freqstart=[],freqend=[],freqlist=[],labelsforfreq=[],filename="Plot.eps",massincluded=True):
 		"""
 		Plots contributions of atoms/several atoms to modes with certain frequencies (freqlist starts at 0 here)		
 		
@@ -266,6 +304,7 @@ class AtomicContributionToModes:
 			freqlist (list of int): list of frequencies that will be plotted; this freqlist starts at 0
 			labelsforfreq (list of str): list of labels (str) for each frequency
 			filename (str): filename for the plot
+			massincluded (boolean): uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
 		"""
 		#setting of some parameters in matplotlib: http://matplotlib.org/users/customizing.html
 		mpl.rcParams["savefig.directory"] = os.chdir(os.getcwd())
@@ -284,7 +323,10 @@ class AtomicContributionToModes:
 				#set the first atom to 0
 				atom=int(number)-1
 				for freq in range(len(freqlist)):
-					Entry[freq]= Entry[freq]+ self.__get_Contributions(freqlist[freq],atom)
+					if massincluded:
+						Entry[freq]= Entry[freq]+ self.__get_Contributions(freqlist[freq],atom)
+					else:
+						Entry[freq]= Entry[freq]+ self.__get_Contributions_withoutmassweight(freqlist[freq],atom)				
 					if group==0:
 						summe[freq]=0	
 			
@@ -349,7 +391,7 @@ class AtomicContributionToModes:
 			return start,end
 
 
-	def plot_irred(self,atomgroups,colorofgroups,legendforgroups,transmodes=False,irreps=[],filename="Plot.eps",freqstart=[],freqend=[]):
+	def plot_irred(self,atomgroups,colorofgroups,legendforgroups,transmodes=False,irreps=[],filename="Plot.eps",freqstart=[],freqend=[],massincluded=True):
 		"""
 		Plots contributions of atoms/several atoms to modes with certain irreducible representations (selected by Mulliken symbol)
 		args:
@@ -359,6 +401,7 @@ class AtomicContributionToModes:
 			transmodes (boolean): translational modes are included if true
 			irreps (list of str): list that includes the irreducible modes that are plotted
 			filename (str): filename for the plot
+			massincluded (boolean): uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
 		"""
 		
 		
@@ -375,7 +418,7 @@ class AtomicContributionToModes:
 					labelsforfreq.append(self.__IRLabels[band])
 
 		
-		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename=filename,freqlist=freqlist,labelsforfreq=labelsforfreq,freqstart=freqstart,freqend=freqend)
+		self._plot(atomgroups=atomgroups,colorofgroups=colorofgroups,legendforgroups=legendforgroups,filename=filename,freqlist=freqlist,labelsforfreq=labelsforfreq,freqstart=freqstart,freqend=freqend,massincluded=massincluded)
  
 
 
