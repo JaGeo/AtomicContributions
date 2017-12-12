@@ -3,7 +3,7 @@ from phonopy.units import VaspToCm
 
 
 #Initialize AtomicContributionToModes 
-test=AtomicContributionToModes(PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',supercell=[[3, 0, 0],[0, 3, 0], [0, 0, 4]])
+test=AtomicContributionToModes(PoscarName='POSCAR',ForceConstants=False,ForceFileName='FORCE_SETS',supercell=[[3, 0, 0],[0, 3, 0], [0, 0, 4]],primitive=[[1, 0, 0],[0, 1, 0], [0, 0, 1]],)
 
 
 #write a file with atomic contributions to each mode
