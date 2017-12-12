@@ -18,7 +18,7 @@ How to
 2. Generate the ```FORCE_SETS``` or ```FORCE_CONSTANTS``` file
 3. If neccessary calculate the BORN charges ([More information on this procedure](https://atztogo.github.io/phonopy/procedure.html)) and the ```BORN``` file
 4. Download this repository, export the Python path correctly
-5. Copy an example script, adapt the names of the files, the supercell size and include the rotational matrix to arrive at the primitive cell if necessary (the one you used for the phonon calculation!). 
+5. Copy an example script, adapt the names of the files, the supercell size (the one you used for the phonon calculation!) and include the rotational matrix to arrive at the primitive cell if necessary.  
 6. Run the script
 
 Result
