@@ -75,9 +75,13 @@ class AtomicContributionToModes:
 		self.__set_Contributions_withoutmassweight()
 		
 		#irrepsobject
-		self.__set_IRLabels(phonon=self.__phonon,degeneracy_tolerance=degeneracy_tolerance,factor=factor,q=q)
-		
-		
+		try:
+			self.__set_IRLabels(phonon=self.__phonon,degeneracy_tolerance=degeneracy_tolerance,factor=factor,q=q,symprec=symprec)
+		except:
+			print("Cannot assign IR labels. Play around with symprec, degeneracy_tolerance. The point group could not be implemented.") 
+			self.__freqlist={}
+			for i in range(0,len(self.__frequencies)):			
+				self.__freqlist[i]=i
 	
 	def show_primitivecell(self):
 		"""
@@ -104,12 +108,12 @@ class AtomicContributionToModes:
 		force_constants = parse_FORCE_CONSTANTS(filename=filename)
 		phonon.set_force_constants(force_constants)	
 
-	def __set_IRLabels(self,phonon,degeneracy_tolerance,factor,q):
+	def __set_IRLabels(self,phonon,degeneracy_tolerance,factor,q,symprec):
 		"""
 		sets list of irreducible labels and list of frequencies without degeneracy 
 		"""
 		phonon.set_dynamical_matrix()
-		self.__Irrep=IrReps(dynamical_matrix=phonon._dynamical_matrix,q=q,is_little_cogroup=False,nac_q_direction=None,degeneracy_tolerance=degeneracy_tolerance,factor=factor)
+		self.__Irrep=IrReps(dynamical_matrix=phonon._dynamical_matrix,q=q,is_little_cogroup=False,nac_q_direction=None,factor=factor,symprec=symprec,degeneracy_tolerance=degeneracy_tolerance)
 		self.__Irrep.run()
 		self.__IRLabels=self.__Irrep._get_ir_labels()
 		
@@ -117,6 +121,7 @@ class AtomicContributionToModes:
 		self.__freqlist={}
 		for band in range(len(self.__ListOfModesWithDegeneracy)):
 			self.__freqlist[band]=self.__ListOfModesWithDegeneracy[band][0]
+		
 
 
 	def __FormatEigenvectors(self):
@@ -260,9 +265,11 @@ class AtomicContributionToModes:
 		
 		p={}
 		summe={}
-		if labelsforfreq==[]:		
-			labelsforfreq=self.__IRLabels
-
+		try:		
+			if labelsforfreq==[]:		
+				labelsforfreq=self.__IRLabels
+		except:
+			print("")
 
 
 		if freqlist==[]:		
@@ -279,12 +286,19 @@ class AtomicContributionToModes:
 			if not transmodes:
 				if not freqlist[freq] in [0,1,2]:				
 					newfreqlist.append(freqlist[freq])
-					newlabelsforfreq.append(labelsforfreq[freq])
+					try:			
+						newlabelsforfreq.append(labelsforfreq[freq])
+					except: 
+						newlabelsforfreq.append('')
 					
 
 			else:
 				newfreqlist.append(freqlist[freq])
-				newlabelsforfreq.append(labelsforfreq[freq])
+				try:
+					newlabelsforfreq.append(labelsforfreq[freq])
+				except:
+					newlabelsforfreq.append('')			
+				
 
 
 		
