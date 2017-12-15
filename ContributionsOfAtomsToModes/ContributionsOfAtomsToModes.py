@@ -70,7 +70,7 @@ class AtomicContributionToModes:
 		#Nicer format of the eigenvector file
 		self.__FormatEigenvectors()
 
-		#Get dipole approximation of the intensitiess
+		#Get Contributions
 		self.__set_Contributions()
 		self.__set_Contributions_withoutmassweight()
 		
