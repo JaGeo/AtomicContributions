@@ -112,11 +112,10 @@ class AtomicContributionToModes:
 		"""
 		sets list of irreducible labels and list of frequencies without degeneracy 
 		"""
-		phonon.set_dynamical_matrix()
+		#phonon.set_dynamical_matrix()
 		self.__Irrep=IrReps(dynamical_matrix=phonon._dynamical_matrix,q=q,is_little_cogroup=False,nac_q_direction=None,factor=factor,symprec=symprec,degeneracy_tolerance=degeneracy_tolerance)
 		self.__Irrep.run()
 		self.__IRLabels=self.__Irrep._get_ir_labels()
-		
 		self.__ListOfModesWithDegeneracy=self.__Irrep._get_degenerate_sets()
 		self.__freqlist={}
 		for band in range(len(self.__ListOfModesWithDegeneracy)):
@@ -345,7 +344,7 @@ class AtomicContributionToModes:
 						summe[freq]=0	
 			
 			#plot bar chart
-			p[group]=ax1.barh(np.arange(len(freqlist)),Entry.values(),left=summe.values(),color=color1,height=1,label=legendforgroups[group] ) 
+			p[group]=ax1.barh(np.arange(len(freqlist)),list(Entry.values()),left=list(summe.values()),color=color1,height=1,label=legendforgroups[group] ) 
 			#needed for "left" in the bar chart plot
 			for freq in range(len(freqlist)):
 				if group==0:
@@ -357,7 +356,7 @@ class AtomicContributionToModes:
 			labeling[freq]=round(self.__frequencies[freqlist[freq]],1)
 		#details for the plot
 		plt.rc("font", size=8)
-		ax1.set_yticklabels(labeling.values())
+		ax1.set_yticklabels(list(labeling.values()))
 		ax1.set_yticks(np.arange(0.5,len(self.__frequencies)+0.5))
 		ax2 = ax1.twinx()
 		ax2.set_yticklabels(labelsforfreq)
