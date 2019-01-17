@@ -344,7 +344,7 @@ class AtomicContributionToModes:
 						summe[freq]=0	
 			
 			#plot bar chart
-			p[group]=ax1.barh(np.arange(len(freqlist)),list(Entry.values()),left=list(summe.values()),color=color1,height=1,label=legendforgroups[group] ) 
+			p[group]=ax1.barh(np.arange(len(freqlist)),list(Entry.values()),left=list(summe.values()),color=color1,edgecolor="black",height=1,label=legendforgroups[group] ) 
 			#needed for "left" in the bar chart plot
 			for freq in range(len(freqlist)):
 				if group==0:
