@@ -357,14 +357,14 @@ class AtomicContributionToModes:
 		#details for the plot
 		plt.rc("font", size=8)
 		ax1.set_yticklabels(list(labeling.values()))
-		ax1.set_yticks(np.arange(0.5,len(self.__frequencies)+0.5))
+		ax1.set_yticks(np.arange(0.0,len(self.__frequencies)+0.0))
 		ax2 = ax1.twinx()
 		ax2.set_yticklabels(labelsforfreq)
-		ax2.set_yticks(np.arange(0.5,len(self.__frequencies)+0.5))
+		ax2.set_yticks(np.arange(0.0,len(self.__frequencies)+0.0))
 		#start and end of the yrange
 		start,end=self.__get_freqbordersforplot(freqstart,freqend,freqlist)
-		ax1.set_ylim(start,end)
-		ax2.set_ylim(start,end)
+		ax1.set_ylim(start-0.5,end-0.5)
+		ax2.set_ylim(start-0.5,end-0.5)
 		ax1.set_xlim(0.0, 1.0)
 		ax1.set_xlabel('Contribution of Atoms to Modes')
 		if self.__factor==VaspToCm:
