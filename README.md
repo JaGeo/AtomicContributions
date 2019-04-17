@@ -7,7 +7,7 @@ This python package can visualize the contribution of each atom to the phonon mo
 What to cite
 ------------
 Please cite the following:
-1. J. George, R. Wang, U. Englert, R. Dronskowski, *J. Chem. Phys.* **2017**, *147*, 074112. 
+1. [J. George, R. Wang, U. Englert, R. Dronskowski, *J. Chem. Phys.* **2017**, *147*, 074112.](https://doi.org/10.1063/1.4985886) 
 2. Janine George, & Richard Dronskowski (2018), AtomicContributions (Version 1.3). Zenodo. [http://doi.org/10.5281/zenodo.2597239](http://doi.org/10.5281/zenodo.2597239) ([Bibtex](http://doi.org/10.5281/zenodo.2597239/export/hx)). 
 
 Of course, also [```VASP```](https://www.vasp.at/) and [```Phonopy```](https://github.com/atztogo/phonopy).
