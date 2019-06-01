@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/JaGeo/AtomicContributions/blob/master/LICENSE) [![DOI](https://zenodo.org/badge/110969681.svg)](https://zenodo.org/badge/latestdoi/110969681)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/JaGeo/AtomicContributions/blob/master/LICENSE) [![DOI](https://zenodo.org/badge/110969681.svg)](https://zenodo.org/badge/latestdoi/110969681) ![travis](https://travis-ci.org/JaGeo/AtomicContributions.svg?branch=master)
 
 # AtomicContributions
 This python package can visualize the contribution of each atom to the phonon modes at the Gamma point. To do so, you need [```Phonopy```](https://github.com/atztogo/phonopy) and [```VASP```](https://www.vasp.at/). 
