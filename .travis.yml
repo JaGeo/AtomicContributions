@@ -8,7 +8,7 @@ install:
   - travis_wait pip install .
 # command to run tests
 script:
-  - python -m unittest discover tests
+  - pytest --verbose AtomicContributions
   
 notifications:
   email: false
