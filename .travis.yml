@@ -5,9 +5,10 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - travis_wait pip install .
 # command to run tests
 script:
-  - pytest --verbose --capture=no AtomicContributions
+  - pytest --verbose AtomicContributions
   
 notifications:
   email: false
