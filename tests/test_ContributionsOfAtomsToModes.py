@@ -1,7 +1,6 @@
-from ContributionsOfAtomsToModes import AtomicContributionsCalculator
+from AtomicContributions import AtomicContributionsCalculator
 
 import unittest
-import math
 import numpy as np
 
 
