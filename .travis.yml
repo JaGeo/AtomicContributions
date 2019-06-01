@@ -11,4 +11,4 @@ script:
   - pytest --verbose AtomicContributions
   
 notifications:
-  email: false
+  email: true 
