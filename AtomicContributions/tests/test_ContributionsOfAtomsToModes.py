@@ -2,16 +2,21 @@ from AtomicContributions.ContributionsOfAtomsToModes import AtomicContributionsC
 
 import unittest
 import numpy as np
+import os
+
+path_here = os.path.dirname(__file__)
 
 
 class AtomicContributionToModesTest(unittest.TestCase):
     def setUp(self):
-        self.Contributions = AtomicContributionsCalculator(PoscarName='POSCAR', ForceConstants=False,
-                                                           ForceFileName='FORCE_SETS',
+        self.Contributions = AtomicContributionsCalculator(PoscarName=os.path.join(path_here, 'POSCAR'),
+                                                           ForceConstants=False,
+                                                           ForceFileName=os.path.join(path_here, 'FORCE_SETS'),
                                                            supercell=[[3, 0, 0], [0, 3, 0], [0, 0, 4]],
                                                            primitive=[[1, 0, 0], [0, 1, 0], [0, 0, 1]])
-        self.Contributions_masses = AtomicContributionsCalculator(PoscarName='POSCAR', ForceConstants=False,
-                                                                  ForceFileName='FORCE_SETS',
+        self.Contributions_masses = AtomicContributionsCalculator(PoscarName=os.path.join(path_here, 'POSCAR'),
+                                                                  ForceConstants=False,
+                                                                  ForceFileName=os.path.join(path_here, 'FORCE_SETS'),
                                                                   supercell=[[3, 0, 0], [0, 3, 0], [0, 0, 4]],
                                                                   primitive=[[1, 0, 0], [0, 1, 0], [0, 0, 1]],
                                                                   masses=[12.010700, 12.010700, 15.999400, 15.999400,
@@ -19,13 +24,16 @@ class AtomicContributionToModesTest(unittest.TestCase):
                                                                           2,
                                                                           2, 2, 2, 2, 2, 2])
 
-        self.Contributions2 = AtomicContributionsCalculator(PoscarName='POSCAR.NaCl', ForceConstants=False,
-                                                            ForceFileName='FORCE_SETS.NaCl',
+        self.Contributions2 = AtomicContributionsCalculator(PoscarName=os.path.join(path_here, 'POSCAR.NaCl'),
+                                                            ForceConstants=False,
+                                                            ForceFileName=os.path.join(path_here, 'FORCE_SETS.NaCl'),
                                                             supercell=[[2, 0, 0], [0, 2, 0], [0, 0, 2]], nac=True,
-                                                            BornFileName='BORN.NaCl',
+                                                            BornFileName=os.path.join(path_here, 'BORN.NaCl'),
                                                             primitive=[[0, 0.5, 0.5], [0.5, 0, 0.5], [0.5, 0.5, 0]])
-        self.ContributionsFC = AtomicContributionsCalculator(PoscarName='POSCAR_Methanol', ForceConstants=True,
-                                                             ForceFileName='FORCE_CONSTANTS_Methanol',
+        self.ContributionsFC = AtomicContributionsCalculator(PoscarName=os.path.join(path_here, 'POSCAR_Methanol'),
+                                                             ForceConstants=True,
+                                                             ForceFileName=os.path.join(path_here,
+                                                                                        'FORCE_CONSTANTS_Methanol'),
                                                              supercell=[[1, 0, 0], [0, 1, 0], [0, 0, 1]], nac=False)
 
     def test_attributes(self):

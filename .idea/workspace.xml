@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="23b08da4-19e9-4fd9-9e18-ef0dbcd7b19e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/AtomicContributions/tests/test_ContributionsOfAtomsToModes.py" beforeDir="false" afterPath="$PROJECT_DIR$/AtomicContributions/tests/test_ContributionsOfAtomsToModes.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Example.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Example/Example.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="52" selection-start-column="52" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AtomicContributions/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="ContributionsOfAtomsToModes.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AtomicContributions/ContributionsOfAtomsToModes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" selection-end-line="421" />
+              <folding>
+                <element signature="e#36#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_ContributionsOfAtomsToModes.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AtomicContributions/tests/test_ContributionsOfAtomsToModes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="37" selection-end-line="85" />
+              <folding>
+                <element signature="e#0#89#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>__fre</find>
+      <find>__Format</find>
+      <find>set_IR</find>
+      <find>Eig</find>
+      <find>dege</find>
+      <find>__Force</find>
+      <find>get_</find>
+      <find>get</find>
+      <find>math.cop</find>
+      <find>__PercentageAtom</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/ContributionsOfAtomsToModes/__init__.py" />
+        <option value="$PROJECT_DIR$/ContributionsOfAtomsToModes/ContributionsOfAtomsToModes.py" />
+        <option value="$PROJECT_DIR$/tests/test_ContributionsOfAtomsToModes.py" />
+        <option value="$PROJECT_DIR$/Example/Example.py" />
+        <option value="$PROJECT_DIR$/AtomicContributions/__init__.py" />
+        <option value="$PROJECT_DIR$/AtomicContributions/tests/test_ContributionsOfAtomsToModes.py" />
+        <option value="$PROJECT_DIR$/AtomicContributions/ContributionsOfAtomsToModes.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="75" />
+    <option name="y" value="505" />
+    <option name="width" value="1295" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="AtomicContributions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AtomicContributions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AtomicContributions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AtomicContributions" type="462c0819:PsiDirectoryNode" />
+              <item name="AtomicContributions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AtomicContributions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AtomicContributions" type="462c0819:PsiDirectoryNode" />
+              <item name="AtomicContributions" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AtomicContributions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AtomicContributions" type="462c0819:PsiDirectoryNode" />
+              <item name="Example" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jageorge\Software\AtomicContributions\tests" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python tests.py.test in test_ContributionsOfAtomsToModes.py (1)">
+    <configuration name="Example" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="AtomicContributions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Example" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Example/Example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="py.test in test_ContributionsOfAtomsToModes.py (1)" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="AtomicContributions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AtomicContributions/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/AtomicContributions/tests/test_ContributionsOfAtomsToModes.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration name="py.test in test_ContributionsOfAtomsToModes.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="AtomicContributions" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_ContributionsOfAtomsToModes.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Example" />
+      <item itemvalue="Python tests.py.test in test_ContributionsOfAtomsToModes.py" />
+      <item itemvalue="Python tests.py.test in test_ContributionsOfAtomsToModes.py (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.py.test in test_ContributionsOfAtomsToModes.py (1)" />
+        <item itemvalue="Python tests.py.test in test_ContributionsOfAtomsToModes.py" />
+        <item itemvalue="Python.Example" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="23b08da4-19e9-4fd9-9e18-ef0dbcd7b19e" name="Default" comment="" />
+      <created>1559227481640</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1559227481640</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py - 2019.06.01 at 20h 57m 29s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py - 2019.06.01 at 21h 25m 49s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py - 2019.06.01 at 21h 27m 24s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py - 2019.06.01 at 21h 28m 36s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py - 2019.06.01 at 21h 37m 35s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py - 2019.06.01 at 21h 54m 27s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py_(1) - 2019.06.01 at 22h 33m 28s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py (1)" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py_(1) - 2019.06.01 at 22h 34m 00s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py (1)" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py_(1) - 2019.06.01 at 22h 34m 12s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py (1)" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_ContributionsOfAtomsToModes_py_(1) - 2019.06.01 at 22h 37m 02s.xml">
+      <configuration name="py.test in test_ContributionsOfAtomsToModes.py (1)" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-6" y="-6" width="1293" height="733" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50397456" side_tool="true" visible="true" weight="0.32888147" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49682036" weight="0.32888147" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49602544" visible="true" weight="0.32888147" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49920508" weight="0.32888147" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49682036" weight="0.32888147" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Example/Example.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ContributionsOfAtomsToModes/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/FORCE_SETS">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/POSCAR">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_ContributionsOfAtomsToModes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="24" selection-start-column="24" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Example/Example.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="52" selection-start-column="52" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AtomicContributions/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AtomicContributions/tests/test_ContributionsOfAtomsToModes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="37" selection-end-line="85" />
+          <folding>
+            <element signature="e#0#89#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AtomicContributions/ContributionsOfAtomsToModes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-end-line="421" />
+          <folding>
+            <element signature="e#36#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
