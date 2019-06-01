@@ -1,1 +1,0 @@
-from ContributionsOfAtomsToModes import AtomicContributionsCalculator
