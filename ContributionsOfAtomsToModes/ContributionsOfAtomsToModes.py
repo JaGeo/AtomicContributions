@@ -52,7 +52,7 @@ class AtomicContributionToModes:
             self.__set_ForcesSets(filename=ForceFileName, phonon=self.__phonon)
 
         if ForceConstants:
-            self.__ForceConstants(filename=ForceFileName, phonon=self.__phonon)
+            self.__set_ForceConstants(filename=ForceFileName, phonon=self.__phonon)
 
         # Apply NAC Correction
         if nac:
@@ -62,7 +62,7 @@ class AtomicContributionToModes:
 
         # frequencies and eigenvectors at Gamma
         self._frequencies, self._eigvecs = self.__phonon.get_frequencies_with_eigenvectors(q)
-        
+
         self.__NumberOfBands = len(self._frequencies)
 
         # Nicer format of the eigenvector file
@@ -166,13 +166,13 @@ class AtomicContributionToModes:
         """
         Calculate contribution of each atom to modes"
         """
-        self.__PercentageAtom = {}
+        self._PercentageAtom = {}
         for freq in range(len(self._frequencies)):
             for atom in range(self.__natoms):
                 sum = 0;
                 for alpha in range(3):
                     sum = sum + abs(self._Eigenvector(atom, freq, alpha) * self._Eigenvector(atom, freq, alpha))
-                self.__PercentageAtom[freq, atom] = sum
+                self._PercentageAtom[freq, atom] = sum
 
     def __get_Contributions(self, band, atom):
         """
@@ -180,7 +180,7 @@ class AtomicContributionToModes:
         args:
             band (int): number of the frequency (ordered by energy)
         """
-        return self.__PercentageAtom[band, atom]
+        return self._PercentageAtom[band, atom]
 
     def __set_Contributions_withoutmassweight(self):
         """
