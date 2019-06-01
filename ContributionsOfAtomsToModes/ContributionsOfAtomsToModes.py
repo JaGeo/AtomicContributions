@@ -62,7 +62,7 @@ class AtomicContributionToModes:
 
         # frequencies and eigenvectors at Gamma
         self._frequencies, self._eigvecs = self.__phonon.get_frequencies_with_eigenvectors(q)
-        print(self._eigvecs)
+        
         self.__NumberOfBands = len(self._frequencies)
 
         # Nicer format of the eigenvector file
