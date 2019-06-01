@@ -1,4 +1,4 @@
-from AtomicContributions import AtomicContributionsCalculator
+from AtomicContributions.ContributionsOfAtomsToModes import AtomicContributionsCalculator
 
 import unittest
 import numpy as np

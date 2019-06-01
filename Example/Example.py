@@ -1,4 +1,4 @@
-from AtomicContributions import AtomicContributionsCalculator
+from AtomicContributions.ContributionsOfAtomsToModes import AtomicContributionsCalculator
 
 # from phonopy.units import VaspToCm
 
