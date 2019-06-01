@@ -1,5 +1,5 @@
-from ContributionsOfAtomsToModes  import AtomicContributionToModes 
-from phonopy.units import VaspToCm
+from ContributionsOfAtomsToModes  import AtomicContributionToModes
+#from phonopy.units import VaspToCm
 
 
 #Initialize AtomicContributionToModes 
