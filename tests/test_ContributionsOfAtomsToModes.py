@@ -35,7 +35,7 @@ class AtomicContributionToModesTest(unittest.TestCase):
         self.assertAlmostEqual(abs(self.Contributions._EigFormat[15, 47, 0]), 0.00084433323436)
         self.assertAlmostEqual(abs(self.Contributions._EigFormat[15, 47, 1]), 0.00084433323436)
         self.assertAlmostEqual(abs(self.Contributions._EigFormat[15, 47, 2]), 0.37170414232138)
-        # check if sign of eigenvectors is consistent
+        # check if sign of eigenvectors is consistent!
         self.assertEqual(np.sign(self.Contributions._EigFormat[14, 47, 2]),
                          np.sign(self.Contributions._EigFormat[15, 47, 0]))
         self.assertEqual(np.sign(self.Contributions._EigFormat[14, 47, 2]),
