@@ -5,16 +5,14 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from phonopy import Phonopy
 from phonopy.interface.vasp import read_vasp
-from phonopy.file_IO import parse_FORCE_SETS, parse_BORN, write_FORCE_CONSTANTS, parse_FORCE_CONSTANTS
-from phonopy.structure.atoms import PhonopyAtoms
+from phonopy.file_IO import parse_FORCE_SETS, parse_BORN, parse_FORCE_CONSTANTS
 from phonopy.units import VaspToCm, VaspToTHz, VaspToEv
 from phonopy.phonon.irreps import IrReps
-from phonopy.phonon.degeneracy import degenerate_sets as get_degenerate_sets
 
 import os
 
 
-class AtomicContributionToModes:
+class AtomicContributionsCalculator:
 
     def __init__(self, PoscarName='POSCAR', ForceConstants=False, ForceFileName='FORCE_SETS', BornFileName='BORN',
                  supercell=[[1, 0, 0], [0, 1, 0], [0, 0, 1]], nac=False, symprec=1e-5, masses=[],

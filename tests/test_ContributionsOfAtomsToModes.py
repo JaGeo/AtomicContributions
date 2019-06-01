@@ -1,4 +1,4 @@
-from ContributionsOfAtomsToModes import AtomicContributionToModes
+from ContributionsOfAtomsToModes import AtomicContributionsCalculator
 
 import unittest
 import math
@@ -7,26 +7,27 @@ import numpy as np
 
 class AtomicContributionToModesTest(unittest.TestCase):
     def setUp(self):
-        self.Contributions = AtomicContributionToModes(PoscarName='POSCAR', ForceConstants=False,
-                                                       ForceFileName='FORCE_SETS',
-                                                       supercell=[[3, 0, 0], [0, 3, 0], [0, 0, 4]],
-                                                       primitive=[[1, 0, 0], [0, 1, 0], [0, 0, 1]])
-        self.Contributions_masses = AtomicContributionToModes(PoscarName='POSCAR', ForceConstants=False,
-                                                              ForceFileName='FORCE_SETS',
-                                                              supercell=[[3, 0, 0], [0, 3, 0], [0, 0, 4]],
-                                                              primitive=[[1, 0, 0], [0, 1, 0], [0, 0, 1]],
-                                                              masses=[12.010700, 12.010700, 15.999400, 15.999400,
-                                                                      14.006700, 14.006700, 14.006700, 14.006700, 2, 2,
-                                                                      2, 2, 2, 2, 2, 2])
+        self.Contributions = AtomicContributionsCalculator(PoscarName='POSCAR', ForceConstants=False,
+                                                           ForceFileName='FORCE_SETS',
+                                                           supercell=[[3, 0, 0], [0, 3, 0], [0, 0, 4]],
+                                                           primitive=[[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+        self.Contributions_masses = AtomicContributionsCalculator(PoscarName='POSCAR', ForceConstants=False,
+                                                                  ForceFileName='FORCE_SETS',
+                                                                  supercell=[[3, 0, 0], [0, 3, 0], [0, 0, 4]],
+                                                                  primitive=[[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+                                                                  masses=[12.010700, 12.010700, 15.999400, 15.999400,
+                                                                          14.006700, 14.006700, 14.006700, 14.006700, 2,
+                                                                          2,
+                                                                          2, 2, 2, 2, 2, 2])
 
-        self.Contributions2 = AtomicContributionToModes(PoscarName='POSCAR.NaCl', ForceConstants=False,
-                                                        ForceFileName='FORCE_SETS.NaCl',
-                                                        supercell=[[2, 0, 0], [0, 2, 0], [0, 0, 2]], nac=True,
-                                                        BornFileName='BORN.NaCl',
-                                                        primitive=[[0, 0.5, 0.5], [0.5, 0, 0.5], [0.5, 0.5, 0]])
-        self.ContributionsFC = AtomicContributionToModes(PoscarName='POSCAR_Methanol', ForceConstants=True,
-                                                         ForceFileName='FORCE_CONSTANTS_Methanol',
-                                                         supercell=[[1, 0, 0], [0, 1, 0], [0, 0, 1]], nac=False)
+        self.Contributions2 = AtomicContributionsCalculator(PoscarName='POSCAR.NaCl', ForceConstants=False,
+                                                            ForceFileName='FORCE_SETS.NaCl',
+                                                            supercell=[[2, 0, 0], [0, 2, 0], [0, 0, 2]], nac=True,
+                                                            BornFileName='BORN.NaCl',
+                                                            primitive=[[0, 0.5, 0.5], [0.5, 0, 0.5], [0.5, 0.5, 0]])
+        self.ContributionsFC = AtomicContributionsCalculator(PoscarName='POSCAR_Methanol', ForceConstants=True,
+                                                             ForceFileName='FORCE_CONSTANTS_Methanol',
+                                                             supercell=[[1, 0, 0], [0, 1, 0], [0, 0, 1]], nac=False)
 
     def test_attributes(self):
         # test calculation of frequencies
