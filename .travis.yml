@@ -7,7 +7,7 @@ install:
   - pip install -r requirements.txt
 # command to run tests
 script:
-  - pytest --verbose --capture=no AtomicContributions
+  - python -m unittest discover tests
   
 notifications:
   email: false
