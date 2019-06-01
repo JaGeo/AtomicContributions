@@ -62,7 +62,7 @@ class AtomicContributionToModes:
 
         # frequencies and eigenvectors at Gamma
         self._frequencies, self._eigvecs = self.__phonon.get_frequencies_with_eigenvectors(q)
-
+        print(self._eigvecs)
         self.__NumberOfBands = len(self._frequencies)
 
         # Nicer format of the eigenvector file
@@ -134,7 +134,7 @@ class AtomicContributionToModes:
                     self._EigFormat[beta, alpha, xyz] = self._eigvecs[laufer][alpha]
                     laufer = laufer + 1
 
-    def __Eigenvector(self, atom, band, xoryorz):
+    def _Eigenvector(self, atom, band, xoryorz):
         """
         Gives a certain eigenvector corresponding to one specific atom, band and Cartesian coordinate
 
@@ -160,7 +160,7 @@ class AtomicContributionToModes:
 
         """
 
-        return self.__Eigenvector(atom, band, xoryorz) / np.sqrt(self.__masses[atom])
+        return self._Eigenvector(atom, band, xoryorz) / np.sqrt(self.__masses[atom])
 
     def __set_Contributions(self):
         """
@@ -171,7 +171,7 @@ class AtomicContributionToModes:
             for atom in range(self.__natoms):
                 sum = 0;
                 for alpha in range(3):
-                    sum = sum + abs(self.__Eigenvector(atom, freq, alpha) * self.__Eigenvector(atom, freq, alpha))
+                    sum = sum + abs(self._Eigenvector(atom, freq, alpha) * self._Eigenvector(atom, freq, alpha))
                 self.__PercentageAtom[freq, atom] = sum
 
     def __get_Contributions(self, band, atom):
