@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="AtomicContributions-JaGeo",
+    name="AtomicContributions_JaGeo",
     version="1.4",
     author="Janine George",
     author_email="janine.george@uclouvain.be",
