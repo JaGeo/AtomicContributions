@@ -8,7 +8,6 @@ from phonopy.interface.vasp import read_vasp
 from phonopy.file_IO import parse_FORCE_SETS, parse_BORN, parse_FORCE_CONSTANTS
 from phonopy.units import VaspToCm, VaspToTHz, VaspToEv
 from phonopy.phonon.irreps import IrReps
-
 import os
 
 
