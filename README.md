@@ -14,6 +14,9 @@ Of course, also [```VASP```](https://www.vasp.at/) and [```Phonopy```](https://g
 
 Intallation
 -----------
+You can simply install this package via ```pip install AtomicContributions-JaGeo```. 
+
+
 To use this package you need to install [```Phonopy```](https://github.com/atztogo/phonopy) correctly. Furthermore, ```numpy``` and ```matplotlib``` are required. Also, the python path should be exported correctly. 
 
 How to
@@ -28,7 +31,7 @@ How to
 Result
 ------
 
-![all text](https://github.com/JaGeo/AtomicContributions/blob/master/Doc/allmodes.png)
+![You will arrive at a nice plot visualizing all atomic contributions to modes.](https://github.com/JaGeo/AtomicContributions/blob/master/Doc/allmodes.png)
 
 
 Todo
