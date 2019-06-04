@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="AtomicContributions_JaGeo",
-    version="1.5",
+    version="1.5.0",
     author="Janine George",
     author_email="janine.george@uclouvain.be",
     description="Package to display atomic contributions to modes",
