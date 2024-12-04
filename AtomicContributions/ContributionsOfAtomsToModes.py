@@ -245,7 +245,7 @@ class AtomicContributionsCalculator:
             labelsforfreq (list of str): list of labels (str) for each frequency
             filename (str): filename for the plot
             transmodes (boolean): if transmode is true than translational modes are shown
-            massincluded (boolean): if false, uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
+            massincluded (boolean): uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
         """
 
         p = {}
@@ -301,12 +301,12 @@ class AtomicContributionsCalculator:
             freqlist (list of int): list of frequencies that will be plotted; this freqlist starts at 0
             labelsforfreq (list of str): list of labels (str) for each frequency
             filename (str): filename for the plot
-            massincluded (boolean): if false, uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
+            massincluded (boolean): uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
         """
-        # setting of some parameters in matplotlib: http://matplotlib.org/users/customizing.html
-        mpl.rcParams["savefig.directory"] = os.chdir(os.getcwd())
-        mpl.rcParams["savefig.format"] = 'eps'
 
+        save_directory = os.getcwd()  
+
+        
         fig, ax1 = plt.subplots()
         p = {}
         summe = {}
@@ -400,7 +400,7 @@ class AtomicContributionsCalculator:
             transmodes (boolean): translational modes are included if true
             irreps (list of str): list that includes the irreducible modes that are plotted
             filename (str): filename for the plot
-            massincluded (boolean): if false, uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
+            massincluded (boolean): uses eigenvector divided by sqrt(mass of the atom) for the calculation instead of the eigenvector
         """
 
         freqlist = []
